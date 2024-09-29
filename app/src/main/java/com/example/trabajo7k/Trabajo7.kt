@@ -1,6 +1,10 @@
 package com.example.trabajo7k
+import android.content.ClipData
+import android.media.RouteListingPreference.Item
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -16,6 +20,15 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun MainScreen() {
 
+ //lista de imagenes
+    val listaimagenes = listOf(
+        R.drawable.kot1,
+        R.drawable.kot2,
+        R.drawable.kot3,
+        R.drawable.kot4,
+        R.drawable.kot5
+    )
+
     //declaracion variable
     var Imagin7 by remember { mutableStateOf(false) }
 
@@ -29,6 +42,8 @@ fun MainScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+
         // texto de bienvenida
         Text(
             text = "¡Bienvenido!",
@@ -41,8 +56,8 @@ fun MainScreen() {
             text = "Soraya Tapia",
             fontSize = 21.sp,
             fontWeight = FontWeight.Normal
-
         )
+
 
         // Boton del codigo
         Button(
@@ -56,11 +71,19 @@ fun MainScreen() {
 
         // se agrega la imagen aca
         if (Imagin7) {
-            Image(
-                painter = painterResource(id = R.drawable.kot1),
-                contentDescription = "Países Bajos",
-                modifier = Modifier.size(400.dp)
-            )
+            LazyColumn {
+                items(listaimagenes) { imageRes ->
+                    Image(
+                        painter = painterResource(id = imageRes),
+                        contentDescription = "Países Bajos",
+                        modifier = Modifier
+                            .size(400.dp)
+                            .padding(vertical = 10.dp)
+                            .fillMaxWidth()
+                            .height(500.dp)
+                    )
+                }
+            }
         }
     }
 }
